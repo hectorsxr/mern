@@ -1,10 +1,17 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
-const handle = require('../handlers');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const handle = require('./handlers');
+const db = require('./models');
 
 const app = express();
-const port = 2000;
+const port = process.env.PORT;
+
+app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.json({ hello: 'hello world' }));
 app.use(handle.notFound);
